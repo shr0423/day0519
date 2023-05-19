@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #stage {
+            width: 300px;
+            height: 300px;
+            background: orangered;
+            position: relative;
+        }
+    </style>
+    <script>
+        let box;
+        let stage;
+        let x = 100;
+        let y = 100;
+
+    
+
+        function bgEffect() {
+        
+            stage.style.backgroundPosition = x + "px ," + y + "px";
+        }
+        function createBox() {
+            box = document.createElement("box");
+            box.style.width = 100 + "px";
+            box.style.height = 100 + "px";
+            box.style.background = "gray";
+            box.style.position = "absolute";
+            box.style.left = x+ "px";
+            box.style.top = y + "px";
+
+            stage.appendChild(box);
+
+        }
+
+        function moveRight() {
+            x = x + 100;
+            box.style.left = x + "px";
+        }
+        function moveLeft() {
+            x = x - 100;
+            box.style.left = x + "px";
+        }
+        function moveUp() {
+            y = y - 100;
+            box.style.top = y + "px";
+        }
+        function moveDown() {
+            y = y + 100;
+            box.style.top = y + "px";
+        }
+
+
+        addEventListener("load", function () {
+            stage = document.getElementById("stage");
+            setInterval("bgEffect()", 10);
+            createBox();
+
+            let bt_up = document.getElementById("bt_up");
+            let bt_down = document.getElementById("bt_down");
+            let bt_left = document.getElementById("bt_left");
+            let bt_right = document.getElementById("bt_rigtht");
+
+            box.addEventListener("ArrowUp", function () {
+                moveUp();
+            });
+            box.addEventListener("ArrowDown", function () {
+                moveDown();
+            });
+            box.addEventListener("ArrowRight", function () {
+                moveRight();
+            });
+            box.addEventListener("ArrowLeft", function () {
+                moveLeft();
+            });
+
+            document.body.addEventListener("keydown", function () {
+                let key = event.keyCode;
+                console.log("당신이 누른 키값은:", key);
+
+                switch (key) {
+                    case 37:moveLeft(); break;
+                    case 38:moveUp(); break;
+                    case 39:moveRight(); break;
+                    case 40:moveDown(); break;
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="stage"></div>
+    </div>
+</body>
+
+</html>
